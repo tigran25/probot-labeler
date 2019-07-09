@@ -4,7 +4,12 @@
   "description": "A bot to add/remove labels based on issue/PR events",
   "main": "lib/index.js",
   "scripts": {
-    "test": "rm -rf lib && jest"
+    "test": "rm -rf lib && jest",
+    "build": "rm -rf lib && tsc -p tsconfig.json",
+    "lint": "tslint -p tsconfig.json",
+    "prepare": "npm run build",
+    "start": "probot run ./lib/index.js",
+    "dev": "nodemon --exec \"npm start\""
   },
   "repository": {
     "type": "git",
