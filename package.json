@@ -1,0 +1,37 @@
+{
+  "name": "probot-labeler",
+  "version": "0.1.0",
+  "description": "A bot to add/remove labels based on issue/PR events",
+  "main": "lib/index.js",
+  "scripts": {
+    "test": "rm -rf lib && jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lswith/probot-labeler.git"
+  },
+  "keywords": [
+    "probot"
+  ],
+  "author": "Luke Swithenbank",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/lswith/probot-labeler/issues"
+  },
+  "homepage": "https://github.com/lswith/probot-labeler#readme",
+  "dependencies": {
+    "joi": "^14.3.1",
+    "probot": "^9.2.15"
+  },
+  "devDependencies": {
+    "@types/jest": "^24.0.15",
+    "@types/joi": "^14.3.3",
+    "@types/node": "^12.6.1",
+    "jest": "^24.8.0",
+    "nodemon": "^1.19.1",
+    "smee-client": "^1.1.0",
+    "ts-jest": "^24.0.2",
+    "tslint": "^5.18.0",
+    "typescript": "^3.5.3"
+  }
+}
