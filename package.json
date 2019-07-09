@@ -10,6 +10,9 @@
     "type": "git",
     "url": "git+https://github.com/lswith/probot-labeler.git"
   },
+  "files": [
+    "lib"
+  ],
   "keywords": [
     "probot"
   ],
