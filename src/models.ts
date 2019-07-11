@@ -1,7 +1,7 @@
 import Joi = require("joi");
 
 export interface IActionMap {
-  [key: string]: { add?: string[], remove?: string[] };
+  [key: string]: { add?: string[]; remove?: string[] };
 }
 
 export interface IConfig {
@@ -21,7 +21,7 @@ const pullsActions = [
   "synchronize",
   "ready_for_review",
   "locked",
-  "unlocked",
+  "unlocked"
 ];
 
 const issuesActions = [
@@ -40,19 +40,17 @@ const issuesActions = [
   "locked",
   "unlocked",
   "milestoned",
-  "demilestoned",
+  "demilestoned"
 ];
 
 const fields = {
-  add: Joi.array()
-    .description("Labels to add for this action"),
-  remove: Joi.array()
-    .description("Labels to remove for this action"),
+  add: Joi.array().description("Labels to add for this action"),
+  remove: Joi.array().description("Labels to remove for this action")
 };
 
 function buildActionObject(actions: string[]) {
   const actionsMap: { [key: string]: Joi.ObjectSchema } = {};
-  actions.forEach((action) => {
+  actions.forEach(action => {
     actionsMap[action] = Joi.object().keys(fields);
   });
   return Joi.object().keys(actionsMap);
@@ -68,5 +66,5 @@ function buildActionObject(actions: string[]) {
 //       - locked
 export const schema = Joi.object().keys({
   issues: buildActionObject(issuesActions),
-  pulls: buildActionObject(pullsActions),
+  pulls: buildActionObject(pullsActions)
 });

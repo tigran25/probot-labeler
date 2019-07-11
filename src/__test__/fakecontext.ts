@@ -18,7 +18,9 @@ export class FakeContext {
     this.isBot = false;
   }
 
-  public issue<T>(object: T): ({ number: any } & { owner: string, repo: string } & T) {
+  public issue<T>(
+    object: T
+  ): { number: any } & { owner: string; repo: string } & T {
     return Object.assign({ owner: "test", repo: "test", number: 1 }, object);
   }
 }
