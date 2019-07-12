@@ -77,14 +77,12 @@ export async function handle(
 async function addLabels(context: Context, labels: string[]) {
   const issue = context.issue({ labels });
   await context.github.issues
-    .addLabels(
-      context.issue({
-        repo: issue.repo,
-        owner: issue.owner,
-        issue_number: issue.number,
-        labels: issue.labels
-      })
-    )
+    .addLabels({
+      repo: issue.repo,
+      owner: issue.owner,
+      issue_number: issue.number,
+      labels: issue.labels
+    })
     .catch(err => {
       throw new Error(
         `Couldn't add labels to issue: ${context.issue().number}, ${err}`
