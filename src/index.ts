@@ -3,8 +3,6 @@ import { ConfigManager } from "./config";
 import { handle } from "./handler";
 import { IConfig, schema } from "./models";
 
-const configManager = new ConfigManager<IConfig>("labels.yml", {}, schema);
-
 module.exports = async (app: Application) => {
   const events = [
     "issues",
@@ -12,6 +10,7 @@ module.exports = async (app: Application) => {
     "pull_request_review",
     "pull_request_review_comment"
   ];
+  const configManager = new ConfigManager<IConfig>("labels.yml", {}, schema);
 
   app.on(events, async (context: Context) => {
     context.log("Grabbing Config");
