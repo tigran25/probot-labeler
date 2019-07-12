@@ -75,8 +75,16 @@ export async function handle(
 }
 
 async function addLabels(context: Context, labels: string[]) {
+  const issue = context.issue({ labels });
   await context.github.issues
-    .addLabels(context.issue({ labels }))
+    .addLabels(
+      context.issue({
+        repo: issue.repo,
+        owner: issue.owner,
+        issue_number: issue.number,
+        labels: issue.labels
+      })
+    )
     .catch(err => {
       throw new Error(
         `Couldn't add labels to issue: ${context.issue().number}, ${err}`
@@ -86,8 +94,14 @@ async function addLabels(context: Context, labels: string[]) {
 
 async function removeLabels(context: Context, labels: string[]) {
   for (const label of labels) {
+    const issue = context.issue({ name: label });
     await context.github.issues
-      .removeLabel(context.issue({ name: label }))
+      .removeLabel({
+        repo: issue.repo,
+        owner: issue.owner,
+        issue_number: issue.number,
+        name: issue.name
+      })
       .catch(err => {
         throw new Error(
           `Couldn't add labels to issue: ${context.issue().number}, ${err}`
