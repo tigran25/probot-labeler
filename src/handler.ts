@@ -5,6 +5,16 @@ export async function handle(
   context: Context,
   config: IConfig
 ): Promise<void | Error> {
+  const issueNumber = context.issue().number;
+  const owner = context.issue().owner;
+  const repo = context.issue().repo;
+  const logger = context.log.child({
+    owner: owner,
+    repo: repo,
+    issue: issueNumber,
+    app: "probot-labler"
+  });
+
   // don't run on actions performed by bots
   if (!context.isBot) {
     const currentAction: string = context.payload.action;
@@ -24,12 +34,14 @@ export async function handle(
               return !currentLabels.includes(x);
             });
             await addLabels(context, labelsToAdd);
+            logger.debug(`added labels: ${labelsToAdd}`);
           }
           if (config.issues[action].remove) {
             const labelsToRemove = config.issues[action].remove!.filter(x => {
               return currentLabels.includes(x);
             });
             await removeLabels(context, labelsToRemove);
+            logger.debug(`removed labels: ${labelsToRemove}`);
           }
         }
       }
@@ -47,12 +59,14 @@ export async function handle(
               return !currentLabels.includes(x);
             });
             await addLabels(context, labelsToAdd);
+            logger.debug(`added labels: ${labelsToAdd}`);
           }
           if (config.pulls[action].remove) {
             const labelsToRemove = config.pulls[action].remove!.filter(x => {
               return currentLabels.includes(x);
             });
             await removeLabels(context, labelsToRemove);
+            logger.debug(`removed labels: ${labelsToRemove}`);
           }
         }
       }

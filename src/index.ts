@@ -11,22 +11,32 @@ module.exports = async (app: Application) => {
     "pull_request_review_comment"
   ];
   const configManager = new ConfigManager<IConfig>("labels.yml", {}, schema);
+  app.log.info("probot-labeler loaded");
 
   app.on(events, async (context: Context) => {
-    context.log("Grabbing Config");
+    const inumber = context.issue().number;
+    const repo = context.issue().repo;
+    const owner = context.issue().owner;
+
+    const logger = context.log.child({
+      owner: owner,
+      repo: repo,
+      issue: inumber,
+      app: "probot-labler"
+    });
+    logger.debug("Getting Config");
+
     const config = await configManager.getConfig(context).catch(err => {
       context.log.error(err);
       return {} as IConfig;
     });
     if (config.issues || config.pulls) {
-      context.log(
-        `Handling issue: ${context.issue().number}, ${context.issue().owner} ${
-          context.issue().repo
-        }`
-      );
+      logger.debug("Config exists");
+      logger.debug(config);
       await handle(context, config).catch(err => {
-        context.log.error(err);
+        logger.error(err);
       });
+      logger.debug("Handled");
     }
   });
 
