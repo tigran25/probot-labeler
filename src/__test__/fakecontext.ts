@@ -16,6 +16,15 @@ export class FakeContext {
     this.name = "test";
     this.id = "test";
     this.isBot = false;
+    this.log = {
+      child: (x: any) => {
+        return {
+          debug: (y: any) => {
+            return;
+          }
+        };
+      }
+    };
   }
 
   public issue<T>(
