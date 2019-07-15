@@ -19,10 +19,13 @@ module.exports = async (app: Application) => {
     const owner = context.issue().owner;
 
     const logger = context.log.child({
-      owner: owner,
-      repo: repo,
-      issue: inumber,
-      app: "probot-labler"
+      id: "${owner}/${repo}/${inumber}",
+      name: "probot-labler",
+      params: {
+        owner: owner,
+        repo: repo,
+        issue: inumber
+      }
     });
     logger.debug("Getting Config");
 
