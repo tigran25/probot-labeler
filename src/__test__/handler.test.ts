@@ -7,7 +7,7 @@ it("performs a label addition from an action config", () => {
   expect.assertions(2);
   const github = new FakeGithub([]);
   const context = new FakeContext(
-    { action: "opened", issue: { labels: [] } },
+    { sender: { type: "User" }, action: "opened", issue: { labels: []  } },
     github,
     {}
   );
@@ -22,7 +22,7 @@ it("performs multiple label additions from an action config", () => {
   expect.assertions(2);
   const github = new FakeGithub([]);
   const context = new FakeContext(
-    { action: "opened", issue: { labels: [] } },
+    { sender: { type: "User" }, action: "opened", issue: { labels: [] } },
     github,
     {}
   );
@@ -37,7 +37,7 @@ it("doesn't perform a label addition when the label is already on the issue/PR",
   expect.assertions(2);
   const github = new FakeGithub([]);
   const context = new FakeContext(
-    { action: "opened", issue: { labels: [] } },
+    { sender: { type: "User" }, action: "opened", issue: { labels: [] } },
     github,
     {}
   );
@@ -52,7 +52,7 @@ it("performs a label removal from an action config", () => {
   expect.assertions(2);
   const github = new FakeGithub([]);
   const context = new FakeContext(
-    { action: "opened", issue: { labels: [{ name: "triage" }] } },
+    { sender: { type: "User" }, action: "opened", issue: { labels: [{ name: "triage" }] } },
     github,
     {}
   );
@@ -68,7 +68,7 @@ it("performs multiple label removals from an action config", () => {
   const github = new FakeGithub([]);
   const context = new FakeContext(
     {
-      action: "opened",
+      sender: { type: "User" }, action: "opened",
       issue: { labels: [{ name: "triage" }, { name: "test" }] }
     },
     github,
@@ -87,7 +87,7 @@ it("doesn't perform a label removal when the label isn't present on the issue/PR
   expect.assertions(2);
   const github = new FakeGithub([]);
   const context = new FakeContext(
-    { action: "opened", issue: { labels: [] } },
+    { sender: { type: "User" }, action: "opened", issue: { labels: [] } },
     github,
     {}
   );

@@ -1,4 +1,6 @@
-export class FakeContext {
+import { Context } from "probot";
+
+export class FakeContext extends Context<any> {
   public payload: any;
   public github: any;
   public name: string;
@@ -6,16 +8,16 @@ export class FakeContext {
   public repo: any;
   public log: any;
   public event: any;
-  public isBot: boolean;
+  public isBot: any;
   public config: any;
 
   constructor(payload: any, github: any, configMethod: any, log = console) {
+    super(payload, github, {} as any);
     this.payload = payload;
     this.github = github;
     this.config = configMethod;
     this.name = "test";
     this.id = "test";
-    this.isBot = false;
     this.log = {
       child: (x: any) => {
         return {
