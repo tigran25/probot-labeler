@@ -7,7 +7,7 @@ it("performs a label addition from an action config", () => {
   expect.assertions(2);
   const github = new FakeGithub([]);
   const context = new FakeContext(
-    { sender: { type: "User" }, action: "opened", issue: { labels: []  } },
+    { sender: { type: "User" }, action: "opened", issue: { labels: [] } },
     github,
     {}
   );
@@ -52,7 +52,11 @@ it("performs a label removal from an action config", () => {
   expect.assertions(2);
   const github = new FakeGithub([]);
   const context = new FakeContext(
-    { sender: { type: "User" }, action: "opened", issue: { labels: [{ name: "triage" }] } },
+    {
+      sender: { type: "User" },
+      action: "opened",
+      issue: { labels: [{ name: "triage" }] }
+    },
     github,
     {}
   );
@@ -68,7 +72,8 @@ it("performs multiple label removals from an action config", () => {
   const github = new FakeGithub([]);
   const context = new FakeContext(
     {
-      sender: { type: "User" }, action: "opened",
+      sender: { type: "User" },
+      action: "opened",
       issue: { labels: [{ name: "triage" }, { name: "test" }] }
     },
     github,
