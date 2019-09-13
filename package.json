@@ -33,18 +33,18 @@
     "probot-config-manager": "^1.0.1"
   },
   "devDependencies": {
-    "@types/jest": "^24.0.15",
+    "@types/jest": "24.0.18",
     "@types/joi": "^14.3.3",
-    "@types/node": "^12.6.1",
-    "jest": "^24.8.0",
-    "nodemon": "^1.19.1",
+    "@types/node": "12.7.5",
+    "jest": "24.9.0",
+    "nodemon": "1.19.2",
     "prettier": "^1.18.2",
-    "semantic-release": "^15.13.18",
+    "semantic-release": "15.13.24",
     "smee-client": "^1.1.0",
-    "ts-jest": "^24.0.2",
-    "tslint": "^5.18.0",
+    "ts-jest": "24.1.0",
+    "tslint": "5.20.0",
     "tslint-config-prettier": "^1.18.0",
     "tslint-plugin-prettier": "^2.0.1",
-    "typescript": "^3.5.3"
+    "typescript": "3.6.3"
   }
 }
