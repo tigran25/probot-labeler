@@ -8,7 +8,7 @@ module.exports = async (app: Application) => {
     "issues",
     "pull_request",
     "pull_request_review",
-    "pull_request_review_comment"
+    "pull_request_review_comment",
   ];
   const configManager = new ConfigManager<IConfig>("labels.yml", {}, schema);
   app.log.info("probot-labeler loaded");
@@ -24,8 +24,8 @@ module.exports = async (app: Application) => {
       params: {
         owner: owner,
         repo: repo,
-        issue: inumber
-      }
+        issue: inumber,
+      },
     });
     logger.debug("Getting Config");
 
@@ -40,14 +40,14 @@ module.exports = async (app: Application) => {
     if (config.issues || config.pulls) {
       logger.debug("Config exists");
       logger.debug(config);
-      await handle(context, config).catch(err => {
+      await handle(context, config).catch((err) => {
         logger.error(err);
       });
       logger.debug("Handled");
     }
   });
 
-  app.on("*", async context => {
+  app.on("*", async (context) => {
     context.log({ event: context.event, action: context.payload.action });
   });
 };

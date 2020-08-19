@@ -12,7 +12,7 @@ it("performs a label addition from an action config", () => {
     {}
   );
   const config: IConfig = { issues: { opened: { add: ["triage"] } } };
-  return handle(context, config).then(resp => {
+  return handle(context, config).then((resp) => {
     expect(github.labelsAdded).toEqual(["triage"]);
     expect(github.labelsRemoved).toEqual([]);
   });
@@ -27,7 +27,7 @@ it("performs multiple label additions from an action config", () => {
     {}
   );
   const config: IConfig = { issues: { opened: { add: ["triage", "test"] } } };
-  return handle(context, config).then(resp => {
+  return handle(context, config).then((resp) => {
     expect(github.labelsAdded).toEqual(["triage", "test"]);
     expect(github.labelsRemoved).toEqual([]);
   });
@@ -42,7 +42,7 @@ it("doesn't perform a label addition when the label is already on the issue/PR",
     {}
   );
   const config: IConfig = { issues: { opened: { add: ["triage"] } } };
-  return handle(context, config).then(resp => {
+  return handle(context, config).then((resp) => {
     expect(github.labelsAdded).toEqual(["triage"]);
     expect(github.labelsRemoved).toEqual([]);
   });
@@ -55,13 +55,13 @@ it("performs a label removal from an action config", () => {
     {
       sender: { type: "User" },
       action: "opened",
-      issue: { labels: [{ name: "triage" }] }
+      issue: { labels: [{ name: "triage" }] },
     },
     github,
     {}
   );
   const config: IConfig = { issues: { opened: { remove: ["triage"] } } };
-  return handle(context, config).then(resp => {
+  return handle(context, config).then((resp) => {
     expect(github.labelsRemoved).toEqual(["triage"]);
     expect(github.labelsAdded).toEqual([]);
   });
@@ -74,15 +74,15 @@ it("performs multiple label removals from an action config", () => {
     {
       sender: { type: "User" },
       action: "opened",
-      issue: { labels: [{ name: "triage" }, { name: "test" }] }
+      issue: { labels: [{ name: "triage" }, { name: "test" }] },
     },
     github,
     {}
   );
   const config: IConfig = {
-    issues: { opened: { remove: ["triage", "test"] } }
+    issues: { opened: { remove: ["triage", "test"] } },
   };
-  return handle(context, config).then(resp => {
+  return handle(context, config).then((resp) => {
     expect(github.labelsRemoved).toEqual(["triage", "test"]);
     expect(github.labelsAdded).toEqual([]);
   });
@@ -97,7 +97,7 @@ it("doesn't perform a label removal when the label isn't present on the issue/PR
     {}
   );
   const config: IConfig = { issues: { opened: { remove: ["triage"] } } };
-  return handle(context, config).then(resp => {
+  return handle(context, config).then((resp) => {
     expect(github.labelsRemoved).toEqual([]);
     expect(github.labelsAdded).toEqual([]);
   });
