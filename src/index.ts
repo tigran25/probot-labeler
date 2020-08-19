@@ -29,10 +29,14 @@ module.exports = async (app: Application) => {
     });
     logger.debug("Getting Config");
 
-    const config = await configManager.getConfig(context).catch(err => {
+    let config: IConfig;
+    try {
+      config = await configManager.getConfig(context);
+    } catch (err) {
       context.log.error(err);
-      return {} as IConfig;
-    });
+      config = {};
+    }
+
     if (config.issues || config.pulls) {
       logger.debug("Config exists");
       logger.debug(config);
